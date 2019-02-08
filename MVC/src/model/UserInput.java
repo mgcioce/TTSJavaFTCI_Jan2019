@@ -3,12 +3,14 @@
  */
 package model;
 
+import java.util.Observable;
+
 /**
  * @author mikea
  *
  */
-public class UserInput {
-	
+public class UserInput extends Observable {
+
 	private int menuChoice;
 	
 	public UserInput() {
@@ -17,5 +19,11 @@ public class UserInput {
 	
 	public void setMenuChoice(int i) {
 		this.menuChoice = i;
+		setChanged();
+		//notifyObservers(null);
+	}
+
+	public int getMenuChoice() {
+		return this.menuChoice;
 	}
 }

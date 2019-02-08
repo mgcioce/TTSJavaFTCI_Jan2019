@@ -56,7 +56,11 @@ public class Database {
 	}
 	
 	public void delete(String id) {
-		this.db.put(id,null);
+		this.db.remove(id);
+	}
+
+	public void deleteAll() {
+		this.db.clear();
 	}
 	
 	public void update(String id, String first, String last) {
@@ -77,7 +81,25 @@ public class Database {
 	
 	public String read(String id) {
 		StudentModel sm = this.db.get(id);
-		return sm.toString();
+		if (!Objects.isNull(sm))
+			return sm.toString();
+		else
+			return "Error: no record found";
+	}
+
+	public String read(String first, String last) {
+		String returnString = "Error: no entry found";
+		StudentModel nextStudent = null;
+		Set<Map.Entry<String, StudentModel>> hashSet = this.db.entrySet();
+		for (Map.Entry<String, StudentModel> e: hashSet) {
+			nextStudent = e.getValue();
+			String f = nextStudent.getFirstName();
+			String l = nextStudent.getLastName();
+			if (f.equalsIgnoreCase(first) && l.equalsIgnoreCase(last)) {
+				returnString = nextStudent.toString();
+			}
+		}
+		return returnString;
 	}
 	
 	public void close() {

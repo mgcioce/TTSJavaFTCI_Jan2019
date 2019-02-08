@@ -10,7 +10,7 @@ import java.util.*;
  * This is the Model. It is used to pass data to the View and Controller components.
  *
  */
-public class StudentModel {
+public class StudentModel extends Observable {
 
 	private String firstName;
 	private String lastName;
