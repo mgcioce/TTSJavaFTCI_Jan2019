@@ -1,0 +1,2 @@
+2a682957-f89e-4260-b669-02d46b688b91,Sedan,Nissan,Altima,4,4,Automatic,regular,v6,30.5,Michelin,true,300.0
+96f85e49-4d65-484e-baca-3e6c1db30fac,Vehicle,Toyota,4wheeler,4,0,Manual,regular,v2,33.0,hankook
