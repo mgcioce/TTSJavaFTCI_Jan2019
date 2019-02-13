@@ -19,13 +19,14 @@ public class BlogPostController {
 
     @GetMapping("/")
     public String index(BlogPost bp) {
+
         return "blogpost/index";
     }
 
     @PostMapping("/")
     public String addNewBlogPost(BlogPost bp, Model model) {
-        BlogPost nextPost = new BlogPost(bp.getAuthor(), bp.getTitle(), bp.getPost());
-        bpr.save(nextPost);
+        //BlogPost nextPost = new BlogPost(bp.getAuthor(), bp.getTitle(), bp.getPost());
+        bpr.save(bp);
         model.addAttribute("title",bp.getTitle());
         model.addAttribute("author",bp.getAuthor());
         model.addAttribute("blogEntry",bp.getPost());
