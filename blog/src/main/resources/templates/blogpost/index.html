@@ -1,32 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/standard.css" rel="stylesheet">
     <title>Blog Site</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h1>Welcome to Our Blog Post Site!</h1>
-<h3>Check out our blogs!</h3>
-<p>Please use the form below to submit a Blog Post:</p>
-<form action="#" th:action="@{/}" th:object="${blogPost}" method="post">
+<div class="container">
+    <h1>Welcome to Our Blog Post Site!</h1>
+    <h3>Check out our blogs!</h3>
+    <div class="row">
+        <div th:each="blog:${posts}">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel heading">
+                        <p th:text="${blog.getTitle()}"/>
+                    </div>
+                    <div class="panel body">
+                        <p th:text="${blog.getAuthor()}" />
+                        <p th:text="${blog.getPost()}"/>
+                    </div>
+                    <div class="panel footer">
+                        <a th:href="@{/blog-post/${blog.getId()}" class="btn btn-info" role="button" th:method="put">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <table>
         <tr>
-            <td>Title</td>
-            <td><input type="text" th:field="*{title}"/></td>
-        </tr>
-        <tr>
-            <td>Author</td>
-            <td><input type="text" th:field="*{author}"/></td>
-        </tr>
-        <tr>
-            <td>Blog Entry</td>
-            <td><input type="text" th:field="*{post}"/></td>
-        </tr>
-        <tr>
-            <td><button type="submit">Submit</button></td>
+            <td>
+                <a th:href="@{/blog-post/new}" class="btn btn-info" role="button">New Blog Entry</a>
+            </td>
         </tr>
     </table>
-</form>
 
+</div>
+<script src="webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/3.3.1-2/jquery.min.js"></script>
 </body>
 </html>

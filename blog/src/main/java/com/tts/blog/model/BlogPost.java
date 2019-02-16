@@ -47,6 +47,10 @@ public class BlogPost {
         return this.post;
     }
 
+    public int getId() {
+        return this.id.intValue();
+    }
+
     @Override
     public String toString() {
         return "BlogPost [id=" + this.id + ", author=" + author + ", title=" + title + ", post=" + post + "]";
