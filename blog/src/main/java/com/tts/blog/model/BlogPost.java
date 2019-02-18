@@ -47,8 +47,8 @@ public class BlogPost {
         return this.post;
     }
 
-    public int getId() {
-        return this.id.intValue();
+    public Long getId() {
+        return this.id;
     }
 
     @Override

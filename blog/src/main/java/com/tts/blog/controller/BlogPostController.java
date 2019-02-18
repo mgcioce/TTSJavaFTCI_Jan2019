@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 @Controller
@@ -39,6 +42,25 @@ public class BlogPostController {
     public String index(Model model) {
         model.addAttribute("posts",this.blogPosts);
         return "blogpost/index";
+    }
+
+    @GetMapping("/blog-post/{id}")
+    public String viewBlogEntry(@PathVariable Long id, Model model) {
+        Optional op = bpr.findById(id);
+        BlogPost blogPost = (BlogPost) op.get();
+        model.addAttribute("title",blogPost.getTitle());
+        model.addAttribute("author", blogPost.getAuthor());
+        model.addAttribute("blogEntry", blogPost.getPost());
+        return "blogPost/result";
+    }
+
+    @RequestMapping(value = "/blog_posts/{id}", method = RequestMethod.DELETE)
+    public String deletePostWithId(@PathVariable Long id,
+                                   BlogPost blogPost) {
+
+        blogPostRepository.deleteById(id);
+        return "blogpost/index";
+
     }
 
     @GetMapping("/blog-post/new")
