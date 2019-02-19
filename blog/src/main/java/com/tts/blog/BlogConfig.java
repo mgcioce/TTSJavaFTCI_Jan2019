@@ -11,6 +11,7 @@ public class BlogConfig {
 
     @Bean
     public ArrayList<BlogPost> blogPosts() {
+
         return new ArrayList<BlogPost>();
     }
 }
