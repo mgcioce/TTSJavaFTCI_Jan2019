@@ -26,8 +26,11 @@
                     <div class="panel footer">
                         <a th:href="@{'/blog-post/{id}/edit'(id=${blog.id})}"
                            class="btn btn-info" role="button">Edit Post</a>
-                        <a th:href="@{'/blog-post/{id}/delete'(id=${blog.id})}" class="btn btn-info"
-                           th:method="delete" role="button">Delete post</a>
+                        <form th:action="@{'/blog-post/{id}/delete'(id=${blog.id})}" th:method="delete" >
+                            <button class="btn btn-primary">Delete Post</button>
+                        </form>
+                        <!--<a th:href="@{'/blog-post/{id}/delete'(id=${blog.id})}" class="btn btn-info"-->
+                           <!--th:method="delete" role="button">Delete post</a>-->
                     </div>
                 </div>
             </div>

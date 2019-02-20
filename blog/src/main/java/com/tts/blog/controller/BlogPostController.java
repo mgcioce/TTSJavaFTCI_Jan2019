@@ -15,6 +15,7 @@ import java.util.Optional;
 public class BlogPostController {
 
     //private BlogPost blogPost;
+    //@Autowired
     private ArrayList<BlogPost> blogPosts;
 
     /*
@@ -25,13 +26,22 @@ public class BlogPostController {
     and Long objects.
      */
 
-    @Autowired
+//    @Autowired
     private BlogPostRepository bpr;
 
-    public BlogPostController(ArrayList<BlogPost> blogPosts) {
-
+    public BlogPostController(ArrayList<BlogPost> blogPosts, BlogPostRepository bpr) {
+        this.bpr = bpr;
         this.blogPosts = blogPosts;
     }
+
+    private void mirrorDB() {
+        Iterable<BlogPost> blogList = bpr.findAll();
+        blogPosts.clear();
+        for(BlogPost blog: blogList) {
+            blogPosts.add(blog);
+        }
+    }
+
 
 //    public void setBlogPost(BlogPost blogPost) {
 //        this.blogPost = blogPost;
@@ -46,7 +56,7 @@ public class BlogPostController {
     @GetMapping("/blog-post/{id}/edit")
     public String editBlogEntryView(@PathVariable("id") Long id, Model model) {
         Optional<BlogPost> op = bpr.findById(id);
-        System.out.println(op.get().toString());
+        //System.out.println(op.get().toString());
         model.addAttribute("blogPost",op.get());
         return "blogPost/edit";
     }
@@ -54,6 +64,7 @@ public class BlogPostController {
     @PutMapping("/blog-post/{id}/edit")
     public String editBlogEntryPut(BlogPost bp, Model model) {
         bpr.save(bp);
+        mirrorDB();
         model.addAttribute("title",bp.getTitle());
         model.addAttribute("author",bp.getAuthor());
         model.addAttribute("blogEntry",bp.getPost());
@@ -76,10 +87,11 @@ public class BlogPostController {
         return "blogpost/result";
     }
 
-    @GetMapping("/blog-post/{id}/delete")
+    @DeleteMapping("/blog-post/{id}/delete")
     public String deleteBlogPost(@PathVariable("id") Long id) {
         bpr.deleteById(id);
-        return "blogpost/index";
+        mirrorDB();
+        return "blogpost/result";
     }
 
 
