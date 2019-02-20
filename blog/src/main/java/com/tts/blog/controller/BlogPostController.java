@@ -1,12 +1,11 @@
 package com.tts.blog.controller;
 
 import com.tts.blog.model.BlogPost;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -42,10 +41,6 @@ public class BlogPostController {
         }
     }
 
-
-//    public void setBlogPost(BlogPost blogPost) {
-//        this.blogPost = blogPost;
-//    }
 
     @GetMapping("/")
     public String index(Model model) {
