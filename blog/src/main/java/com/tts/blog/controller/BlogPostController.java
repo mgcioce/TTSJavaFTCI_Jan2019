@@ -43,15 +43,21 @@ public class BlogPostController {
         return "blogpost/index";
     }
 
-    @GetMapping("/blog-post/{id}")
-    public String viewBlogEntry(@PathVariable Long id, Model model) {
-        Optional op = bpr.findById(id);
-        BlogPost blogPost = (BlogPost) op.get();
-        model.addAttribute("title",blogPost.getTitle());
-        model.addAttribute("author", blogPost.getAuthor());
-        model.addAttribute("blogEntry", blogPost.getPost());
-        model.addAttribute("id",blogPost.getId());
-        return "blogPost/result";
+    @GetMapping("/blog-post/{id}/edit")
+    public String editBlogEntryView(@PathVariable("id") Long id, Model model) {
+        Optional<BlogPost> op = bpr.findById(id);
+        System.out.println(op.get().toString());
+        model.addAttribute("blogPost",op.get());
+        return "blogPost/edit";
+    }
+
+    @PutMapping("/blog-post/{id}/edit")
+    public String editBlogEntryPut(BlogPost bp, Model model) {
+        bpr.save(bp);
+        model.addAttribute("title",bp.getTitle());
+        model.addAttribute("author",bp.getAuthor());
+        model.addAttribute("blogEntry",bp.getPost());
+        return "blogpost/result";
     }
 
     @GetMapping("/blog-post/new")
@@ -68,6 +74,12 @@ public class BlogPostController {
         model.addAttribute("author",bp.getAuthor());
         model.addAttribute("blogEntry",bp.getPost());
         return "blogpost/result";
+    }
+
+    @GetMapping("/blog-post/{id}/delete")
+    public String deleteBlogPost(@PathVariable("id") Long id) {
+        bpr.deleteById(id);
+        return "blogpost/index";
     }
 
 

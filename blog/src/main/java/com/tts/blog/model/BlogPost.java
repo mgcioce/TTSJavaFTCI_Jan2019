@@ -51,6 +51,10 @@ public class BlogPost {
         return this.id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "BlogPost [id=" + this.id + ", author=" + author + ", title=" + title + ", post=" + post + "]";

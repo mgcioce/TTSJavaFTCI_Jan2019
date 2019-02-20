@@ -3,8 +3,8 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../static/css/standard.css" rel="stylesheet">
+    <link href="../../webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/standard.css" rel="stylesheet">
     <title>Blog Site</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
@@ -24,7 +24,10 @@
                         <p th:text="${blog.getPost()}"/>
                     </div>
                     <div class="panel footer">
-                        <!--<a th:href="@{/blog-post/new}" class="btn btn-info" role="button" th:method="put">Edit</a> -->
+                        <a th:href="@{'/blog-post/{id}/edit'(id=${blog.id})}"
+                           class="btn btn-info" role="button">Edit Post</a>
+                        <a th:href="@{'/blog-post/{id}/delete'(id=${blog.id})}" class="btn btn-info"
+                           th:method="delete" role="button">Delete post</a>
                     </div>
                 </div>
             </div>
