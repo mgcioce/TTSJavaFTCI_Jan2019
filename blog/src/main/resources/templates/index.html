@@ -3,15 +3,13 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="../../webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/standard.css" rel="stylesheet">
-    <title>Blog Site</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:insert="~{fragments/test :: head}"></div>
 </head>
 <body>
 <div class="container">
     <h1>Welcome to Our Blog Post Site!</h1>
     <h3>Check out our blogs!</h3>
+    <div th:insert="~{fragments/test :: test}"></div>
     <div class="row">
         <div th:each="blog:${posts}">
             <div class="col-md-6">
@@ -24,13 +22,11 @@
                         <p th:text="${blog.getPost()}"/>
                     </div>
                     <div class="panel footer">
-                        <a th:href="@{'/blog-post/{id}/edit'(id=${blog.id})}"
-                           class="btn btn-info" role="button">Edit Post</a>
-                        <form th:action="@{'/blog-post/{id}/delete'(id=${blog.id})}" th:method="delete" >
+                        <a th:href="@{'/blog-post/{id}/edit'(id=${blog.getId()})}"
+                           class="btn btn-primary" role="button">Edit Post</a>
+                        <form th:action="@{'/blog-post/{id}/delete'(id=${blog.getId()})}" th:method="delete" >
                             <button class="btn btn-primary">Delete Post</button>
                         </form>
-                        <!--<a th:href="@{'/blog-post/{id}/delete'(id=${blog.id})}" class="btn btn-info"-->
-                           <!--th:method="delete" role="button">Delete post</a>-->
                     </div>
                 </div>
             </div>
@@ -45,7 +41,6 @@
     </table>
 
 </div>
-<script src="webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script src="webjars/jquery/3.3.1-2/jquery.min.js"></script>
+<div th:insert="~{fragments/test :: script}"></div>
 </body>
 </html>

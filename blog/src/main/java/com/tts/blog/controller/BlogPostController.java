@@ -13,19 +13,9 @@ import java.util.Optional;
 @Controller
 public class BlogPostController {
 
-    //private BlogPost blogPost;
-    //@Autowired
+
     private ArrayList<BlogPost> blogPosts;
 
-    /*
-    This @Autowired annotation searches for first a similar name, then a similar type, to
-    assign an object to this field via Dependency Injection. In this case, it notices the
-    BlogPostRepository interface and creates a new object whose class has implemented the
-    BlogPostRepository interface with the default implementations specified to use BlogPost
-    and Long objects.
-     */
-
-//    @Autowired
     private BlogPostRepository bpr;
 
     public BlogPostController(ArrayList<BlogPost> blogPosts, BlogPostRepository bpr) {
@@ -45,15 +35,14 @@ public class BlogPostController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("posts",this.blogPosts);
-        return "blogpost/index";
+        return "index";
     }
 
     @GetMapping("/blog-post/{id}/edit")
     public String editBlogEntryView(@PathVariable("id") Long id, Model model) {
         Optional<BlogPost> op = bpr.findById(id);
-        //System.out.println(op.get().toString());
         model.addAttribute("blogPost",op.get());
-        return "blogPost/edit";
+        return "edit";
     }
 
     @PutMapping("/blog-post/{id}/edit")
@@ -63,13 +52,13 @@ public class BlogPostController {
         model.addAttribute("title",bp.getTitle());
         model.addAttribute("author",bp.getAuthor());
         model.addAttribute("blogEntry",bp.getPost());
-        return "blogpost/result";
+        return "result";
     }
 
     @GetMapping("/blog-post/new")
     public String newEntry(BlogPost bp) {
 
-        return "blogpost/new";
+        return "new";
     }
 
     @PostMapping("/blog-post/new")
@@ -79,14 +68,14 @@ public class BlogPostController {
         model.addAttribute("title",bp.getTitle());
         model.addAttribute("author",bp.getAuthor());
         model.addAttribute("blogEntry",bp.getPost());
-        return "blogpost/result";
+        return "result";
     }
 
     @DeleteMapping("/blog-post/{id}/delete")
     public String deleteBlogPost(@PathVariable("id") Long id) {
         bpr.deleteById(id);
         mirrorDB();
-        return "blogpost/result";
+        return "result";
     }
 
 
