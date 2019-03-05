@@ -34,6 +34,7 @@ public class BlogPostController {
 
     @GetMapping("/")
     public String index(Model model) {
+        mirrorDB();
         model.addAttribute("posts",this.blogPosts);
         return "index";
     }
